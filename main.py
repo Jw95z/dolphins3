@@ -49,7 +49,7 @@ if __name__ == "__main__":
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False 
 
 
-    db.init_app(app) 
-    db.app = app 
-    db.create_all() 
+    # db.init_app(app) 
+    # db.app = app 
+    # db.create_all() 
     app.run(host='127.0.0.1', debug=True, port=5000)
