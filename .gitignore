@@ -1,4 +1,14 @@
-__pycache__
-bp_projects/__pycache__/projects.cpython-39.pyc
-__init__.pyc
+__pycache__/
+*.py[cod]
+*$py.class
+
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
 volumes/sqlite.db
+instance/volumes/sqlite.db
