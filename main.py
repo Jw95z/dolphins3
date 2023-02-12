@@ -4,7 +4,7 @@ import threading
 from flask import render_template  # import render_template from "public" flask libraries
 
 # import "packages" from "this" project
-from __init__ import app, db  # Definitions initialization
+from volumes.__init__ import app, db  # Definitions initialization
 from model.jokes import initJokes
 import os
 # from model.users import initUsers
@@ -47,7 +47,9 @@ if __name__ == "__main__":
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + dbfile
     app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = True 
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False 
-
+    db.init_app(app) 
+    db.app = app 
+    db.create_all() 
     app.run(host='127.0.0.1', debug=True, port=5000)
 
 
