@@ -2,7 +2,7 @@
 Runtime link: https://flask.nighthawkcodingsociety.com/
 ### Quick way to get started
 > Quick steps with MacOS or WSL; this uses Nix for programmatic way to build tools and dependencies.
-
+## New location for dynamic data
 
 - Open a Terminal, install nix which requires admin password: 
 ```bash
