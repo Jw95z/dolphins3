@@ -1,10 +1,10 @@
 import threading
-
+from flask import Flask
 # import "packages" from flask
 from flask import render_template  # import render_template from "public" flask libraries
 
 # import "packages" from "this" project
-from volumes.__init__ import app, db  # Definitions initialization
+  # Definitions initialization
 from model.jokes import initJokes
 import os
 # from model.users import initUsers
@@ -12,10 +12,11 @@ import os
 # setup APIs
 from api.covid import covid_api # Blueprint import api definition
 from api.joke import joke_api # Blueprint import api definition
-from api.user import user_api 
+from api.user import user_api
+from model.users import db 
 # setup App pages
 from projects.projects import app_projects # Blueprint directory import projects definition
-
+app = Flask(__name__)
 # register URIs
 app.register_blueprint(joke_api) # register api routes
 app.register_blueprint(covid_api) # register api routes
