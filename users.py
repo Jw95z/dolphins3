@@ -229,7 +229,7 @@ def initUsers():
         db.init_app(app)
         db.create_all()
         """Tester data for table"""
-        u1 = test(username="James", password="1234", bmi="", monday="", tuesday="", wednesday="", thursday="", friday="", saturday="", sunday="", calories="", sport="")
+        u1 = test(username="James", password="1234", bmi="3.6", monday="a", tuesday="b", wednesday="c", thursday="d", friday="e", saturday="f", sunday="g", calories="50", sport="soccer")
         users = [u1]
 
 
@@ -240,4 +240,4 @@ def initUsers():
             except IntegrityError:
                 '''fails with bad or duplicate data'''
                 db.session.remove()
-                print(f"Records exist, duplicate email, or error: {user.uid}")
+                print(f"Records exist, duplicate email, or error: {user.username}")
