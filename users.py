@@ -63,6 +63,9 @@ class test(db.Model):
     @password.setter
     def password(self, password):
         self._password = password
+    
+    def is_password(self, password):
+        return self._password == password
 
     @property
     def bmi(self):

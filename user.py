@@ -9,7 +9,7 @@ user_api = Blueprint('user_api', __name__,
 # API docs https://flask-restful.readthedocs.io/en/latest/api.html
 api = Api(user_api)
 
-class ScoreAPI:        
+class UserAPI:        
     class _Create(Resource):
         def post(self):
             ''' Read data for json body '''
@@ -60,7 +60,26 @@ class ScoreAPI:
             users = test.query.all()    # read/extract all users from database
             json_ready = [user.read() for user in users]  # prepare output in json
             return jsonify(json_ready)  # jsonify creates Flask response object, more specific to APIs than json.dumps
+    class _Security(Resource):
 
+        def post(self):
+            ''' Read data for json body '''
+            body = request.get_json()
+            
+            ''' Get Data '''
+            username = body.get('username')
+            if username is None:
+                return {'message': f'User ID is missing, or is less than 2 characters'}, 400
+            password = body.get('password')
+            
+            ''' Find user '''
+            user = test.query.filter_by(_username=username).first()
+            if user is None or not user.is_password(password):
+                return {'message': f"Invalid user id or password"}, 400
+            
+            ''' authenticated user '''
+            return jsonify(user.read())
     # building RESTapi endpoint
     api.add_resource(_Create, '/create')
     api.add_resource(_Read, '/')
+    api.add_resource(_Security, '/match')
