@@ -19,10 +19,29 @@ class ScoreAPI:
             # validate name
             username = body.get('username')
             password = body.get('password')
-
+            bmi = body.get('bmi')
+            monday = body.get('monday')
+            tuesday = body.get('tuesday')
+            wednesday = body.get('wednesday')
+            thursday = body.get('thursday')
+            friday = body.get('friday')
+            saturday = body.get('saturday')
+            sunday = body.get('sunday')
+            calories = body.get('calories')
+            sport = body.get('sport')
             ''' #1: Key code block, setup USER OBJECT '''
             uo = test(username=username, 
-                      password=password)
+                      password=password, 
+                      bmi=bmi, 
+                      monday=monday, 
+                      tuesday=tuesday, 
+                      wednesday=wednesday, 
+                      thursday=thursday, 
+                      friday=friday, 
+                      saturday=saturday, 
+                      sunday=sunday, 
+                      calories=calories, 
+                      sport=sport)
             
             ''' Additional garbage error checking '''
             # set password if provided

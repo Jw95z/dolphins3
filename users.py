@@ -190,12 +190,32 @@ class test(db.Model):
 
 # CRUD update: updates user name, password, phone
     # returns self
-    def update(self, username="", password = ""):
+    def update(self, username="", password = "", bmi="",monday="",tuesday="",wednesday="",thursday="", friday="", saturday="", sunday="", calories= "", sport=""):
         """only updates values with length"""
         if len(username) > 0:
             self.username = username
         if len(password) > 0:
             self.password = password
+        if len(bmi) >= 0:
+            self.bmi = bmi
+        if len(monday) >= 0:
+            self.monday = monday
+        if len(tuesday) >= 0:
+            self.tuesday = tuesday
+        if len(wednesday) >= 0:
+            self.wednesday = wednesday
+        if len(thursday) >= 0:
+            self.thursday = thursday
+        if len(friday) >= 0:
+            self.friday = friday
+        if len(saturday) >= 0:
+            self.saturday = saturday
+        if len(sunday) >= 0:
+            self.sunday = sunday
+        if len(calories) >= 0:
+            self.calories = calories
+        if len(sport) >= 0:
+            self.sport = sport
         db.session.commit()
         return self
     def delete(self):
