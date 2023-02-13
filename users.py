@@ -15,10 +15,29 @@ class test(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     _username = db.Column(db.String(255), unique=True, nullable=False)
     _password = db.Column(db.String(255), unique=False, nullable=False)
-
-    def __init__(self, username, password):
+    _bmi = db.Column(db.String(255), unique=False, nullable=False)
+    _monday = db.Column(db.String(255), unique=False, nullable=False)
+    _tuesday = db.Column(db.String(255), unique=False, nullable=False)
+    _wednesday = db.Column(db.String(255), unique=False, nullable=False)
+    _thursday = db.Column(db.String(255), unique=False, nullable=False)
+    _friday = db.Column(db.String(255), unique=False, nullable=False)
+    _saturday = db.Column(db.String(255), unique=False, nullable=False)
+    _sunday = db.Column(db.String(255), unique=False, nullable=False)
+    _calories = db.Column(db.String(255), unique=False, nullable=False)
+    _sport = db.Column(db.String(255), unique=False, nullable=False)
+    def __init__(self, username, password, bmi, monday, tuesday, wednesday, thursday, friday, saturday, sunday, calories, sport):
         self._username = username
         self._password = password
+        self._bmi = bmi
+        self._monday = monday
+        self._tuesday = tuesday
+        self._wednesday = wednesday
+        self._thursday = thursday
+        self._friday = friday
+        self._saturday = saturday
+        self._sunday = sunday
+        self._calories = calories
+        self._sport = sport
 
  # a getter method, extracts email from object
     @property
@@ -45,6 +64,96 @@ class test(db.Model):
     def password(self, password):
         self._password = password
 
+    @property
+    def bmi(self):
+        return self._bmi
+    
+    # a setter function, allows name to be updated after initial object creation
+    @bmi.setter
+    def bmi(self, bmi):
+        self._bmi = bmi
+
+    @property
+    def monday(self):
+        return self._monday
+    
+    # a setter function, allows name to be updated after initial object creation
+    @monday.setter
+    def monday(self, monday):
+        self._monday = monday
+
+    @property
+    def tuesday(self):
+        return self._tuesday
+    
+    # a setter function, allows name to be updated after initial object creation
+    @tuesday.setter
+    def tuesday(self, tuesday):
+        self._tuesday = tuesday
+
+    @property
+    def wednesday(self):
+        return self._wednesday
+    
+    # a setter function, allows name to be updated after initial object creation
+    @wednesday.setter
+    def wednesday(self, wednesday):
+        self._wednesday = wednesday
+
+    @property
+    def thursday(self):
+        return self._thursday
+    
+    # a setter function, allows name to be updated after initial object creation
+    @thursday.setter
+    def thursday(self, thursday):
+        self._thursday = thursday
+    
+    @property
+    def friday(self):
+        return self._friday
+    
+    # a setter function, allows name to be updated after initial object creation
+    @friday.setter
+    def friday(self, friday):
+        self._friday = friday
+
+    @property
+    def saturday(self):
+        return self._saturday
+    
+    # a setter function, allows name to be updated after initial object creation
+    @saturday.setter
+    def saturday(self, saturday):
+        self._saturday = saturday
+    
+    @property
+    def sunday(self):
+        return self._sunday
+    
+    # a setter function, allows name to be updated after initial object creation
+    @sunday.setter
+    def sunday(self, sunday):
+        self._sunday = sunday
+
+    @property
+    def calories(self):
+        return self._calories
+    
+    # a setter function, allows name to be updated after initial object creation
+    @calories.setter
+    def calories(self, calories):
+        self._calories = calories
+
+    @property
+    def sport(self):
+        return self._sport
+    
+    # a setter function, allows name to be updated after initial object creation
+    @sport.setter
+    def sport(self, sport):
+        self._sport = sport
+    
  # output content using str(object) in human readable form, uses getter
     # output content using json dumps, this is ready for API response
     def __str__(self):
@@ -67,7 +176,14 @@ class test(db.Model):
             "id": self.id,
             "username": self.username,
             "password": self.password,
-            
+            "bmi": self.bmi,
+            "monday": self.monday,
+            "tuesday": self.tuesday,
+            "wednesday": self.wednesday,
+            "thursday": self.thursday,
+            "friday": self.friday,
+            "calories": self.calories,
+            "sport": self.sport
         }
 
 
@@ -93,7 +209,7 @@ def initUsers():
         db.init_app(app)
         db.create_all()
         """Tester data for table"""
-        u1 = test(username="James", password="1234")
+        u1 = test(username="James", password="1234", bmi="", monday="", tuesday="", wednesday="", thursday="", friday="", saturday="", sunday="", calories="", sport="")
         users = [u1]
 
 
