@@ -6,17 +6,17 @@ from flask import render_template  # import render_template from "public" flask 
 # import "packages" from "this" project
   # Definitions initialization
 from model.jokes import initJokes
+from users import initUsers
 import os
 # from model.users import initUsers
-
+from __init__ import app, db
 # setup APIs
 from api.covid import covid_api # Blueprint import api definition
 from api.joke import joke_api # Blueprint import api definition
-from api.user import user_api
-from model.users import db 
+from user import user_api
 # setup App pages
 from projects.projects import app_projects # Blueprint directory import projects definition
-app = Flask(__name__)
+
 # register URIs
 app.register_blueprint(joke_api) # register api routes
 app.register_blueprint(covid_api) # register api routes
@@ -38,20 +38,22 @@ def stub():
 @app.before_first_request
 def activate_job():
     initJokes()
-
+    initUsers()
 
 # this runs the application on the development server
 if __name__ == "__main__":
-    basedir = os.path.abspath(os.path.dirname(__file__)) 
-    dbfile = os.path.join(basedir, 'sqlite.db')
-    print(dbfile)
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + dbfile
-    # app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///volumes/sqlite.db'
-    app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = True 
-    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False 
-    db.init_app(app) 
-    db.app = app 
+    # basedir = os.path.abspath(os.path.dirname(__file__)) 
+    # dbfile = os.path.join(basedir, 'sqlite.db')
+
+    # app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + dbfile
+    # # app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///volumes/sqlite.db'
+    # app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = True 
+    # app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False 
+    # db.init_app(app) 
+    # db.app = app 
     # db.create_all() 
+    from flask_cors import CORS
+    cors = CORS(app)
     app.run(host='127.0.0.1', debug=True, port=5000)
 
 

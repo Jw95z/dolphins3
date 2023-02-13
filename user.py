@@ -1,7 +1,7 @@
 from flask import Blueprint, request, jsonify
 from flask_restful import Api, Resource # used for REST API building
 
-from model.users import test
+from users import test
 
 user_api = Blueprint('user_api', __name__,
                    url_prefix='/api/users')

@@ -1,7 +1,9 @@
+# Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
 *$py.class
 
+# Environments
 .env
 .venv
 env/
@@ -9,3 +11,7 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+
+# instance data, databases
+volumes/sqlite.db
+instance/volumes/sqlite.db

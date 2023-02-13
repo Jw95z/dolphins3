@@ -2,13 +2,12 @@ from random import randrange
 from datetime import date
 import json
 from flask_sqlalchemy import SQLAlchemy
-
+from __init__ import db, app
 from sqlalchemy.exc import IntegrityError
 from werkzeug.security import generate_password_hash, check_password_hash
 
 
 
-db = SQLAlchemy()
 class test(db.Model):
     __tablename__ = 'users'  # table name is plural, class name is singular
 
@@ -83,6 +82,26 @@ class test(db.Model):
             self.password = password
         db.session.commit()
         return self
+    def delete(self):
+        db.session.delete(self)
+        db.session.commit()
+        return None
+
+def initUsers():
+    with app.app_context():
+        """Create database and tables"""
+        db.init_app(app)
+        db.create_all()
+        """Tester data for table"""
+        u1 = test(username="James", password="1234")
+        users = [u1]
 
 
-            
+        for user in users:
+            try:
+                '''add a few 1 to 4 notes per user'''
+                user.create()
+            except IntegrityError:
+                '''fails with bad or duplicate data'''
+                db.session.remove()
+                print(f"Records exist, duplicate email, or error: {user.uid}")
