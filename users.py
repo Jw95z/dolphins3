@@ -22,8 +22,13 @@ class test(db.Model):
     _friday = db.Column(db.String(255), unique=False, nullable=False)
     _saturday = db.Column(db.String(255), unique=False, nullable=False)
     _sunday = db.Column(db.String(255), unique=False, nullable=False)
-
-    def __init__(self, username, password, monday, tuesday, wednesday, thursday, friday, saturday, sunday):
+    _sport = db.Column(db.String(255), unique=False, nullable=False)
+    _sex = db.Column(db.String(255), unique=False, nullable=False)
+    _height = db.Column(db.String(255), unique=False, nullable=False),
+    _sport = db.Column(db.String(255), unique=False, nullable=False),
+    _maxcal = db.Column(db.String(255), unique=False, nullable=False)
+    _dob = db.Column(db.Date)
+    def __init__(self, username, password, monday, tuesday, wednesday, thursday, friday, saturday, sport, sunday, sex, weight, height, dob, maxcal):
         self._username = username
         self._password = password
         self._monday = monday
@@ -33,6 +38,12 @@ class test(db.Model):
         self._friday = friday
         self._saturday = saturday
         self._sunday = sunday
+        self._sex = sex
+        self._weight = weight
+        self._height = height
+        self._dob = dob
+        self._sport = sport
+        self._maxcal = maxcal
 
  # a getter method, extracts email from object
     @property
@@ -47,7 +58,6 @@ class test(db.Model):
     # check if uid parameter matches user id in object, return boolean
     def is_username(self, username):
         return self._username == username
-
 
 # a name getter method, extracts name from object
     @property
@@ -125,6 +135,66 @@ class test(db.Model):
     def sunday(self, sunday):
         self._sunday = sunday
 
+    @property
+    def dob(self):
+        dob_string = self._dob.strftime('%m-%d-%Y')
+        return dob_string
+    
+    # dob should be have verification for type date
+    @dob.setter
+    def dob(self, dob):
+        self._dob = dob
+    
+    @property
+    def age(self):
+        today = date.today()
+        return today.year - self._dob.year - ((today.month, today.day) < (self._dob.month, self._dob.day))
+ 
+    @property
+    def sex(self):
+        return self._sex
+    
+    # a setter function, allows name to be updated after initial object creation
+    @sex.setter
+    def sex(self, sex):
+        self._sex = sex
+
+    @property
+    def weight(self):
+        return self._weight
+    
+    # a setter function, allows name to be updated after initial object creation
+    @weight.setter
+    def weight(self, weight):
+        self._weight = weight
+
+    @property
+    def height(self):
+        return self._height
+    
+    # a setter function, allows name to be updated after initial object creation
+    @height.setter
+    def height(self, height):
+        self._height = height
+
+    @property
+    def sport(self):
+        return self._sport
+    
+    # a setter function, allows name to be updated after initial object creation
+    @sport.setter
+    def sport(self, sport):
+        self._sport = sport
+    
+    @property
+    def maxcal(self):
+        return self._maxcal
+    
+    # a setter function, allows name to be updated after initial object creation
+    @maxcal.setter
+    def maxcal(self, maxcal):
+        self._maxcal = maxcal
+    
  # output content using str(object) in human readable form, uses getter
     # output content using json dumps, this is ready for API response
     def __str__(self):
@@ -154,13 +224,19 @@ class test(db.Model):
             "friday": self.friday,
             "saturday": self.saturday,
             "sunday": self.sunday,
+            "sex": self.sex,
+            "weight": self.weight,
+            "height": self.height,
+            "sport": self.sport,
+            "maxcal": self.maxcal,
+            "age": self.age
         }
 
 
 
 # CRUD update: updates user name, password, phone
     # returns self
-    def update(self, username="", password = "", monday="", tuesday="", wednesday="", thursday="", friday="", saturday="", sunday=""):
+    def update(self, username="", password = "", monday="", tuesday="", wednesday="", thursday="", friday="", saturday="", sunday="", sex = "", weight = "", height="", sport = "", maxcal = "", dob = ""):
         """only updates values with length"""
         if len(username) > 0:
             self.username = username
@@ -193,7 +269,7 @@ def initUsers():
         db.init_app(app)
         db.create_all()
         """Tester data for table"""
-        u1 = test(username="James", password="1234", monday="a", tuesday="b", wednesday="c", thursday="d", friday="e", saturday="f", sunday="g")
+        u1 = test(username="James", password="1234", monday="Bench Press", tuesday="Squat", wednesday="Pullups", thursday="Situps", friday="Pushups", saturday="Run", sunday="Deadlift", sex = "male", weight= "", height="", sport = "", maxcal="", dob=date(1847, 2, 11))
         users = [u1]
 
 
