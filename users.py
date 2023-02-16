@@ -236,7 +236,7 @@ class test(db.Model):
 
 # CRUD update: updates user name, password, phone
     # returns self
-    def update(self, username="", password = "", monday="", tuesday="", wednesday="", thursday="", friday="", saturday="", sunday="", sex = "", weight = "", height="", sport = "", maxcal = ""):
+    def update(self, username="", password = "", monday="", tuesday="", wednesday="", thursday="", friday="", saturday="", sunday="", sex = "", weight = "", height="", sport = "", maxcal = "", dob=""):
         """only updates values with length"""
         if len(username) > 0:
             self.username = username
