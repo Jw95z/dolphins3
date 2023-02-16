@@ -22,10 +22,10 @@ class test(db.Model):
     _friday = db.Column(db.String(255), unique=False, nullable=False)
     _saturday = db.Column(db.String(255), unique=False, nullable=False)
     _sunday = db.Column(db.String(255), unique=False, nullable=False)
-    _sport = db.Column(db.String(255), unique=False, nullable=False)
     _sex = db.Column(db.String(255), unique=False, nullable=False)
-    _height = db.Column(db.String(255), unique=False, nullable=False),
-    _sport = db.Column(db.String(255), unique=False, nullable=False),
+    _height = db.Column(db.String(255), unique=False, nullable=False)
+    _weight = db.Column(db.String(255), unique=False, nullable=False)
+    _sport = db.Column(db.String(255), unique=False, nullable=False)
     _maxcal = db.Column(db.String(255), unique=False, nullable=False)
     _dob = db.Column(db.Date)
     def __init__(self, username, password, monday, tuesday, wednesday, thursday, friday, saturday, sport, sunday, sex, weight, height, dob, maxcal):
@@ -236,7 +236,7 @@ class test(db.Model):
 
 # CRUD update: updates user name, password, phone
     # returns self
-    def update(self, username="", password = "", monday="", tuesday="", wednesday="", thursday="", friday="", saturday="", sunday="", sex = "", weight = "", height="", sport = "", maxcal = "", dob = ""):
+    def update(self, username="", password = "", monday="", tuesday="", wednesday="", thursday="", friday="", saturday="", sunday="", sex = "", weight = "", height="", sport = "", maxcal = ""):
         """only updates values with length"""
         if len(username) > 0:
             self.username = username

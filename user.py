@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify
 from flask_restful import Api, Resource # used for REST API building
-
+from datetime import datetime
 from users import test
 
 user_api = Blueprint('user_api', __name__,
@@ -26,6 +26,12 @@ class UserAPI:
             friday = body.get('friday')
             saturday = body.get('saturday')
             sunday = body.get('sunday')
+            sex = body.get('sex')
+            height = body.get('height')
+            weight = body.get('weight')
+            sport = body.get('sport')
+            maxcal = body.get('maxcal')
+            dob = body.get('dob')
             ''' #1: Key code block, setup USER OBJECT '''
             uo = test(username=username, 
                       password=password, 
@@ -35,11 +41,21 @@ class UserAPI:
                       thursday=thursday, 
                       friday=friday, 
                       saturday=saturday, 
-                      sunday=sunday)
+                      sunday=sunday,
+                      sex = sex,
+                      weight=weight, 
+                      height = height,
+                      sport = sport,
+                      maxcal = maxcal,
+                      dob=dob)
             
             ''' Additional garbage error checking '''
             # set password if provided
-            
+            if dob is not None:
+                try:
+                    uo.dob = datetime.strptime(dob, '%Y-%m-%d').date()
+                except:
+                    return {'message': f'Date of birth format error {dob}, must be mm-dd-yyyy'}, 400
             ''' #2: Key Code block to add user to database '''
             # create user in database
             user = uo.create()
