@@ -28,7 +28,7 @@ class test(db.Model):
     _sport = db.Column(db.String(255), unique=False, nullable=False)
     _maxcal = db.Column(db.String(255), unique=False, nullable=False)
     _dob = db.Column(db.Date)
-    def __init__(self, username, password, monday, tuesday, wednesday, thursday, friday, saturday, sport, sunday, sex, weight, height, dob, maxcal):
+    def __init__(self, username, password, monday, tuesday, wednesday, thursday, friday, saturday, sport, sunday, sex, weight, height, maxcal ,dob = date.today()):
         self._username = username
         self._password = password
         self._monday = monday
@@ -229,6 +229,7 @@ class test(db.Model):
             "height": self.height,
             "sport": self.sport,
             "maxcal": self.maxcal,
+            "dob": self.dob,
             "age": self.age
         }
 
@@ -256,6 +257,16 @@ class test(db.Model):
             self.saturday = saturday
         if len(sunday) >= 0:
             self.sunday = sunday
+        if len(sex) >= 0:
+            self.sex = sex
+        if len(weight) >= 0:
+            self.weight = weight
+        if len(height) >= 0:
+            self.height = height
+        if len(sport) >= 0:
+            self.sport = sport
+        if len(maxcal) >= 0:
+            self.maxcal = maxcal
         db.session.commit()
         return self
     def delete(self):
