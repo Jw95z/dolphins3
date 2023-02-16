@@ -15,7 +15,6 @@ class test(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     _username = db.Column(db.String(255), unique=True, nullable=False)
     _password = db.Column(db.String(255), unique=False, nullable=False)
-    _bmi = db.Column(db.String(255), unique=False, nullable=False)
     _monday = db.Column(db.String(255), unique=False, nullable=False)
     _tuesday = db.Column(db.String(255), unique=False, nullable=False)
     _wednesday = db.Column(db.String(255), unique=False, nullable=False)
@@ -23,12 +22,10 @@ class test(db.Model):
     _friday = db.Column(db.String(255), unique=False, nullable=False)
     _saturday = db.Column(db.String(255), unique=False, nullable=False)
     _sunday = db.Column(db.String(255), unique=False, nullable=False)
-    _calories = db.Column(db.String(255), unique=False, nullable=False)
-    _sport = db.Column(db.String(255), unique=False, nullable=False)
-    def __init__(self, username, password, bmi, monday, tuesday, wednesday, thursday, friday, saturday, sunday, calories, sport):
+
+    def __init__(self, username, password, monday, tuesday, wednesday, thursday, friday, saturday, sunday):
         self._username = username
         self._password = password
-        self._bmi = bmi
         self._monday = monday
         self._tuesday = tuesday
         self._wednesday = wednesday
@@ -36,8 +33,6 @@ class test(db.Model):
         self._friday = friday
         self._saturday = saturday
         self._sunday = sunday
-        self._calories = calories
-        self._sport = sport
 
  # a getter method, extracts email from object
     @property
@@ -66,15 +61,6 @@ class test(db.Model):
     
     def is_password(self, password):
         return self._password == password
-
-    @property
-    def bmi(self):
-        return self._bmi
-    
-    # a setter function, allows name to be updated after initial object creation
-    @bmi.setter
-    def bmi(self, bmi):
-        self._bmi = bmi
 
     @property
     def monday(self):
@@ -139,24 +125,6 @@ class test(db.Model):
     def sunday(self, sunday):
         self._sunday = sunday
 
-    @property
-    def calories(self):
-        return self._calories
-    
-    # a setter function, allows name to be updated after initial object creation
-    @calories.setter
-    def calories(self, calories):
-        self._calories = calories
-
-    @property
-    def sport(self):
-        return self._sport
-    
-    # a setter function, allows name to be updated after initial object creation
-    @sport.setter
-    def sport(self, sport):
-        self._sport = sport
-    
  # output content using str(object) in human readable form, uses getter
     # output content using json dumps, this is ready for API response
     def __str__(self):
@@ -179,28 +147,25 @@ class test(db.Model):
             "id": self.id,
             "username": self.username,
             "password": self.password,
-            "bmi": self.bmi,
             "monday": self.monday,
             "tuesday": self.tuesday,
             "wednesday": self.wednesday,
             "thursday": self.thursday,
             "friday": self.friday,
-            "calories": self.calories,
-            "sport": self.sport
+            "saturday": self.saturday,
+            "sunday": self.sunday,
         }
 
 
 
 # CRUD update: updates user name, password, phone
     # returns self
-    def update(self, username="", password = "", bmi="",monday="",tuesday="",wednesday="",thursday="", friday="", saturday="", sunday="", calories= "", sport=""):
+    def update(self, username="", password = "", monday="", tuesday="", wednesday="", thursday="", friday="", saturday="", sunday=""):
         """only updates values with length"""
         if len(username) > 0:
             self.username = username
         if len(password) > 0:
             self.password = password
-        if len(bmi) >= 0:
-            self.bmi = bmi
         if len(monday) >= 0:
             self.monday = monday
         if len(tuesday) >= 0:
@@ -215,10 +180,6 @@ class test(db.Model):
             self.saturday = saturday
         if len(sunday) >= 0:
             self.sunday = sunday
-        if len(calories) >= 0:
-            self.calories = calories
-        if len(sport) >= 0:
-            self.sport = sport
         db.session.commit()
         return self
     def delete(self):
@@ -232,7 +193,7 @@ def initUsers():
         db.init_app(app)
         db.create_all()
         """Tester data for table"""
-        u1 = test(username="James", password="1234", bmi="3.6", monday="a", tuesday="b", wednesday="c", thursday="d", friday="e", saturday="f", sunday="g", calories="50", sport="soccer")
+        u1 = test(username="James", password="1234", monday="a", tuesday="b", wednesday="c", thursday="d", friday="e", saturday="f", sunday="g")
         users = [u1]
 
 
