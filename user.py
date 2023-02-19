@@ -75,21 +75,27 @@ class UserAPI:
         def post(self):
             ''' Read data for json body '''
             body = request.get_json()
-            
             ''' Get Data '''
             username = body.get('username')
             if username is None:
                 return {'message': f'User ID is missing, or is less than 2 characters'}, 400
             password = body.get('password')
-            
             ''' Find user '''
             user = test.query.filter_by(_username=username).first()
             if user is None or not user.is_password(password):
-                return {'message': f"Invalid user id or password"}, 400
-            
+                return {'message': f"Invalid user id or password"}, 400  
             ''' authenticated user '''
+            return jsonify(user.read())
+    class _Calender(Resource):
+        def post(self):
+            body = request.get_json()
+            username = body.get('username')
+            if username is None:
+                return {'message': f'User ID is missing'}, 400
+            user = test.query.filter_by(_username=username).first()
             return jsonify(user.read())
     # building RESTapi endpoint
     api.add_resource(_Create, '/create')
     api.add_resource(_Read, '/')
     api.add_resource(_Security, '/match')
+    api.add_resource(_Calender, '/calender')
