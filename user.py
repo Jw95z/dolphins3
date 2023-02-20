@@ -2,7 +2,7 @@ from flask import Blueprint, request, jsonify
 from flask_restful import Api, Resource # used for REST API building
 from datetime import datetime
 from users import test
-
+from __init__ import db, app
 user_api = Blueprint('user_api', __name__,
                    url_prefix='/api/users')
 
@@ -103,9 +103,9 @@ class UserAPI:
             if username is None:
                 return {'message': f'User ID is missing'}, 400
             user = test.query.filter_by(_username=username).first()
-            users = user.read()
-            users['monday'] = monday
-            return jsonify(users)
+            user.monday +=  " " + monday
+            db.session.commit()
+            return jsonify(user.read())
     class _Calender_tuesday(Resource):
         def post(self):
             body = request.get_json()
@@ -114,9 +114,9 @@ class UserAPI:
             if username is None:
                 return {'message': f'User ID is missing'}, 400
             user = test.query.filter_by(_username=username).first()
-            users = user.read()
-            users['tuesday'] = tuesday
-            return jsonify(users)
+            user.tuesday += " " + tuesday
+            db.session.commit()
+            return jsonify(user.read())
     class _Calender_wednesday(Resource):
         def post(self):
             body = request.get_json()
@@ -125,9 +125,9 @@ class UserAPI:
             if username is None:
                 return {'message': f'User ID is missing'}, 400
             user = test.query.filter_by(_username=username).first()
-            users = user.read()
-            users['wednesday'] = wednesday
-            return jsonify(users)
+            user.wednesday += " " + wednesday
+            db.session.commit()
+            return jsonify(user.read())
 
     class _Calender_thursday(Resource):
         def post(self):
@@ -137,9 +137,9 @@ class UserAPI:
             if username is None:
                 return {'message': f'User ID is missing'}, 400
             user = test.query.filter_by(_username=username).first()
-            users = user.read()
-            users['thursday'] = thursday
-            return jsonify(users)
+            user.thursday += " " + thursday
+            db.session.commit()
+            return jsonify(user.read())
     class _Calender_friday(Resource):
         def post(self):
             body = request.get_json()
@@ -148,9 +148,9 @@ class UserAPI:
             if username is None:
                 return {'message': f'User ID is missing'}, 400
             user = test.query.filter_by(_username=username).first()
-            users = user.read()
-            users['friday'] = friday
-            return jsonify(users)
+            user.friday += " " + friday
+            db.session.commit()
+            return jsonify(user.read())
 
     class _Calender_saturday(Resource):
         def post(self):
@@ -160,9 +160,9 @@ class UserAPI:
             if username is None:
                 return {'message': f'User ID is missing'}, 400
             user = test.query.filter_by(_username=username).first()
-            users = user.read()
-            users['saturday'] = saturday
-            return jsonify(users)
+            user.saturday += " " + saturday
+            db.session.commit()
+            return jsonify(user.read())
     
     class _Calender_sunday(Resource):
         def post(self):
@@ -172,9 +172,9 @@ class UserAPI:
             if username is None:
                 return {'message': f'User ID is missing'}, 400
             user = test.query.filter_by(_username=username).first()
-            users = user.read()
-            users['sunday'] = sunday
-            return jsonify(users)
+            user.sunday += " " + sunday
+            db.session.commit()
+            return jsonify(user.read())
     
         
     # building RESTapi endpoint
