@@ -93,9 +93,99 @@ class UserAPI:
             if username is None:
                 return {'message': f'User ID is missing'}, 400
             user = test.query.filter_by(_username=username).first()
-            return jsonify(user.read())
+            users = user.read()
+            return jsonify(users)
+    class _Calender_monday(Resource):
+        def post(self):
+            body = request.get_json()
+            username = body.get('username')
+            monday = body.get('monday')
+            if username is None:
+                return {'message': f'User ID is missing'}, 400
+            user = test.query.filter_by(_username=username).first()
+            users = user.read()
+            users['monday'] = monday
+            return jsonify(users)
+    class _Calender_tuesday(Resource):
+        def post(self):
+            body = request.get_json()
+            username = body.get('username')
+            tuesday = body.get('tuesday')
+            if username is None:
+                return {'message': f'User ID is missing'}, 400
+            user = test.query.filter_by(_username=username).first()
+            users = user.read()
+            users['tuesday'] = tuesday
+            return jsonify(users)
+    class _Calender_wednesday(Resource):
+        def post(self):
+            body = request.get_json()
+            username = body.get('username')
+            wednesday = body.get('wednesday')
+            if username is None:
+                return {'message': f'User ID is missing'}, 400
+            user = test.query.filter_by(_username=username).first()
+            users = user.read()
+            users['wednesday'] = wednesday
+            return jsonify(users)
+
+    class _Calender_thursday(Resource):
+        def post(self):
+            body = request.get_json()
+            username = body.get('username')
+            thursday = body.get('thursday')
+            if username is None:
+                return {'message': f'User ID is missing'}, 400
+            user = test.query.filter_by(_username=username).first()
+            users = user.read()
+            users['thursday'] = thursday
+            return jsonify(users)
+    class _Calender_friday(Resource):
+        def post(self):
+            body = request.get_json()
+            username = body.get('username')
+            friday = body.get('friday')
+            if username is None:
+                return {'message': f'User ID is missing'}, 400
+            user = test.query.filter_by(_username=username).first()
+            users = user.read()
+            users['friday'] = friday
+            return jsonify(users)
+
+    class _Calender_saturday(Resource):
+        def post(self):
+            body = request.get_json()
+            username = body.get('username')
+            saturday = body.get('saturday')
+            if username is None:
+                return {'message': f'User ID is missing'}, 400
+            user = test.query.filter_by(_username=username).first()
+            users = user.read()
+            users['saturday'] = saturday
+            return jsonify(users)
+    
+    class _Calender_sunday(Resource):
+        def post(self):
+            body = request.get_json()
+            username = body.get('username')
+            sunday = body.get('sunday')
+            if username is None:
+                return {'message': f'User ID is missing'}, 400
+            user = test.query.filter_by(_username=username).first()
+            users = user.read()
+            users['sunday'] = sunday
+            return jsonify(users)
+    
+        
     # building RESTapi endpoint
     api.add_resource(_Create, '/create')
     api.add_resource(_Read, '/')
     api.add_resource(_Security, '/match')
     api.add_resource(_Calender, '/calender')
+    api.add_resource(_Calender_monday, '/monday')
+    api.add_resource(_Calender_tuesday, '/tuesday')
+    api.add_resource(_Calender_wednesday, '/wednesday')
+    api.add_resource(_Calender_thursday, '/thursday')
+    api.add_resource(_Calender_friday, '/friday')
+    api.add_resource(_Calender_saturday, '/saturday')
+    api.add_resource(_Calender_sunday, '/sunday')
