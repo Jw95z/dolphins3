@@ -102,6 +102,8 @@ class UserAPI:
             monday = body.get('monday')
             if username is None:
                 return {'message': f'User ID is missing'}, 400
+            if monday is None:
+                return {'message': f'Monday is missing'}, 400   
             user = test.query.filter_by(_username=username).first()
             user.monday +=  " " + monday
             db.session.commit()
@@ -113,6 +115,8 @@ class UserAPI:
             tuesday = body.get('tuesday')
             if username is None:
                 return {'message': f'User ID is missing'}, 400
+            if tuesday is None:
+                return {'message': f'Tuesday is missing'}, 400   
             user = test.query.filter_by(_username=username).first()
             user.tuesday += " " + tuesday
             db.session.commit()
@@ -124,6 +128,8 @@ class UserAPI:
             wednesday = body.get('wednesday')
             if username is None:
                 return {'message': f'User ID is missing'}, 400
+            if wednesday is None:
+                return {'message': f'Wednesday is missing'}, 400   
             user = test.query.filter_by(_username=username).first()
             user.wednesday += " " + wednesday
             db.session.commit()
@@ -136,6 +142,8 @@ class UserAPI:
             thursday = body.get('thursday')
             if username is None:
                 return {'message': f'User ID is missing'}, 400
+            if thursday is None:
+                return {'message': f'Thursday is missing'}, 400   
             user = test.query.filter_by(_username=username).first()
             user.thursday += " " + thursday
             db.session.commit()
@@ -147,6 +155,8 @@ class UserAPI:
             friday = body.get('friday')
             if username is None:
                 return {'message': f'User ID is missing'}, 400
+            if friday is None:
+                return {'message': f'Friday is missing'}, 400   
             user = test.query.filter_by(_username=username).first()
             user.friday += " " + friday
             db.session.commit()
@@ -159,8 +169,11 @@ class UserAPI:
             saturday = body.get('saturday')
             if username is None:
                 return {'message': f'User ID is missing'}, 400
+            if saturday is None:
+                return {'message': f'Saturday is missing'}, 400
             user = test.query.filter_by(_username=username).first()
             user.saturday += " " + saturday
+            
             db.session.commit()
             return jsonify(user.read())
     
@@ -171,11 +184,82 @@ class UserAPI:
             sunday = body.get('sunday')
             if username is None:
                 return {'message': f'User ID is missing'}, 400
+            if sunday is None:
+                return {'message': f'Sunday is missing'}, 400
             user = test.query.filter_by(_username=username).first()
             user.sunday += " " + sunday
             db.session.commit()
             return jsonify(user.read())
-    
+    class _delete_monday(Resource):
+        def post(self):
+            body = request.get_json()
+            username = body.get('username')
+            if username is None:
+                return {'message': f'User ID is missing'}, 400
+            user = test.query.filter_by(_username=username).first()
+            user.monday = ""
+            db.session.commit()
+            return jsonify(user.read())
+    class _delete_tuesday(Resource):
+        def post(self):
+            body = request.get_json()
+            username = body.get('username')
+            if username is None:
+                return {'message': f'User ID is missing'}, 400
+            user = test.query.filter_by(_username=username).first()
+            user.tuesday = ""
+            db.session.commit()
+            return jsonify(user.read())
+    class _delete_wednesday(Resource):
+        def post(self):
+            body = request.get_json()
+            username = body.get('username')
+            if username is None:
+                return {'message': f'User ID is missing'}, 400
+            user = test.query.filter_by(_username=username).first()
+            user.wednesday = ""
+            db.session.commit()
+            return jsonify(user.read())
+    class _delete_thursday(Resource):
+        def post(self):
+            body = request.get_json()
+            username = body.get('username')
+            if username is None:
+                return {'message': f'User ID is missing'}, 400
+            user = test.query.filter_by(_username=username).first()
+            user.thursday = ""
+            db.session.commit()
+            return jsonify(user.read())
+    class _delete_friday(Resource):
+        def post(self):
+            body = request.get_json()
+            username = body.get('username')
+            if username is None:
+                return {'message': f'User ID is missing'}, 400
+            user = test.query.filter_by(_username=username).first()
+            user.friday = ""
+            db.session.commit()
+            return jsonify(user.read())
+    class _delete_saturday(Resource):
+        def post(self):
+            body = request.get_json()
+            username = body.get('username')
+            if username is None:
+                return {'message': f'User ID is missing'}, 400
+            user = test.query.filter_by(_username=username).first()
+            user.saturday = ""
+            db.session.commit()
+            return jsonify(user.read())
+    class _delete_sunday(Resource):
+        def post(self):
+            body = request.get_json()
+            username = body.get('username')
+            if username is None:
+                return {'message': f'User ID is missing'}, 400
+            user = test.query.filter_by(_username=username).first()
+            user.sunday = ""
+            db.session.commit()
+            return jsonify(user.read())
         
     # building RESTapi endpoint
     api.add_resource(_Create, '/create')
@@ -189,3 +273,10 @@ class UserAPI:
     api.add_resource(_Calender_friday, '/friday')
     api.add_resource(_Calender_saturday, '/saturday')
     api.add_resource(_Calender_sunday, '/sunday')
+    api.add_resource(_delete_monday, '/delete_monday')
+    api.add_resource(_delete_tuesday, '/delete_tuesday')
+    api.add_resource(_delete_wednesday, '/delete_wednesday')
+    api.add_resource(_delete_thursday, '/delete_thursday')
+    api.add_resource(_delete_friday, '/delete_friday')
+    api.add_resource(_delete_saturday, '/delete_saturday')
+    api.add_resource(_delete_sunday, '/delete_sunday')
