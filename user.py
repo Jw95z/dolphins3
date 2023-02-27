@@ -268,6 +268,98 @@ class UserAPI:
             user.sunday = ""
             db.session.commit()
             return jsonify(user.read())
+    class _update_monday(Resource):
+        def post(self):
+            body = request.get_json()
+            username = body.get('username')
+            monday = body.get('monday')
+            if username is None:
+                return {'message': f'User ID is missing'}, 400
+            if monday is None:
+                return {'message': f'Sunday is missing'}, 400
+            user = test.query.filter_by(_username=username).first()
+            user.monday = monday
+            db.session.commit()
+            return jsonify(user.read())
+    class _update_tuesday(Resource):
+        def post(self):
+            body = request.get_json()
+            username = body.get('username')
+            tuesday = body.get('tuesday')
+            if username is None:
+                return {'message': f'User ID is missing'}, 400
+            if tuesday is None:
+                return {'message': f'Sunday is missing'}, 400
+            user = test.query.filter_by(_username=username).first()
+            user.tuesday = tuesday
+            db.session.commit()
+            return jsonify(user.read())
+    class _update_wednesday(Resource):
+        def post(self):
+            body = request.get_json()
+            username = body.get('username')
+            wednesday = body.get('wednesday')
+            if username is None:
+                return {'message': f'User ID is missing'}, 400
+            if wednesday is None:
+                return {'message': f'Sunday is missing'}, 400
+            user = test.query.filter_by(_username=username).first()
+            user.wednesday = wednesday
+            db.session.commit()
+            return jsonify(user.read())
+    class _update_thursday(Resource):
+        def post(self):
+            body = request.get_json()
+            username = body.get('username')
+            thursday = body.get('thursday')
+            if username is None:
+                return {'message': f'User ID is missing'}, 400
+            if thursday is None:
+                return {'message': f'Sunday is missing'}, 400
+            user = test.query.filter_by(_username=username).first()
+            user.thursday = thursday
+            db.session.commit()
+            return jsonify(user.read())
+    class _update_friday(Resource):
+        def post(self):
+            body = request.get_json()
+            username = body.get('username')
+            friday = body.get('friday')
+            if username is None:
+                return {'message': f'User ID is missing'}, 400
+            if friday is None:
+                return {'message': f'Sunday is missing'}, 400
+            user = test.query.filter_by(_username=username).first()
+            user.friday = friday
+            db.session.commit()
+            return jsonify(user.read())
+    class _update_saturday(Resource):
+        def post(self):
+            body = request.get_json()
+            username = body.get('username')
+            saturday = body.get('saturday')
+            if username is None:
+                return {'message': f'User ID is missing'}, 400
+            if saturday is None:
+                return {'message': f'Sunday is missing'}, 400
+            user = test.query.filter_by(_username=username).first()
+            user.saturday = saturday
+            db.session.commit()
+            return jsonify(user.read())
+    class _update_sunday(Resource):
+        def post(self):
+            body = request.get_json()
+            username = body.get('username')
+            sunday = body.get('sunday')
+            if username is None:
+                return {'message': f'User ID is missing'}, 400
+            if sunday is None:
+                return {'message': f'Sunday is missing'}, 400
+            user = test.query.filter_by(_username=username).first()
+            user.sunday = sunday
+            db.session.commit()
+            return jsonify(user.read())
+    
         
     class _Sex(Resource):
         def post(self):
