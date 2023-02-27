@@ -269,6 +269,61 @@ class UserAPI:
             db.session.commit()
             return jsonify(user.read())
         
+    class _Sex(Resource):
+        def post(self):
+            body = request.get_json()
+            username = body.get('username')
+            sex = body.get('sex')
+            if username is None:
+                return {'message': f'User ID is missing'}, 400
+            if sex is None:
+                return {'message': f'Saturday is missing'}, 400
+            user = test.query.filter_by(_username=username).first()
+            user.sex = sex
+            db.session.commit()
+            return jsonify(user.read())
+    class _Maxcal(Resource):
+        def post(self):
+            body = request.get_json()
+            username = body.get('username')
+            maxcal = body.get('maxcal')
+            if username is None:
+                return {'message': f'User ID is missing'}, 400
+            if maxcal is None:
+                return {'message': f'Saturday is missing'}, 400
+            user = test.query.filter_by(_username=username).first()
+            user.maxcal = maxcal
+            db.session.commit()
+            return jsonify(user.read())
+    class _weight(Resource):
+        def post(self):
+            body = request.get_json()
+            username = body.get('username')
+            weight = body.get('weight')
+            if username is None:
+                return {'message': f'User ID is missing'}, 400
+            if weight is None:
+                return {'message': f'Saturday is missing'}, 400
+            user = test.query.filter_by(_username=username).first()
+            user.weight += weight
+            db.session.commit()
+            return jsonify(user.read())
+    class _height(Resource):
+        def post(self):
+            body = request.get_json()
+            username = body.get('username')
+            height = body.get('sex')
+            if username is None:
+                return {'message': f'User ID is missing'}, 400
+            if height is None:
+                return {'message': f'Saturday is missing'}, 400
+            user = test.query.filter_by(_username=username).first()
+            user.height += height
+            db.session.commit()
+            return jsonify(user.read())
+        
+        
+        
     # building RESTapi endpoint
     api.add_resource(_Create, '/create')
     api.add_resource(_Read, '/')
@@ -289,3 +344,8 @@ class UserAPI:
     api.add_resource(_delete_saturday, '/delete_saturday')
     api.add_resource(_delete_sunday, '/delete_sunday')
     api.add_resource(_findUsername, '/username')
+    api.add_resource(_Sex, '/sex')
+    api.add_resource(_Maxcal, '/maxcal')
+    api.add_resource(_weight, '/weight')
+    api.add_resource(_height, '/height')
+    
