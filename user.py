@@ -76,7 +76,7 @@ class UserAPI:
             users = test.query.all()
             username = [user.read() for user in users]
             for i in range(len(username)):
-                usernames.append({"username": username[i]['username'], "password": username[i]['password']})
+                usernames.append({"username": username[i]['username'], "password": username[i]['password'],"dob": username[i]['dob']})
             return jsonify(usernames)
     class _Security(Resource):
 
