@@ -413,6 +413,42 @@ class UserAPI:
             user.height += height
             db.session.commit()
             return jsonify(user.read())
+    class _update_password(Resource):
+        def post(self):
+            body = request.get_json()
+            username = body.get('username')
+            password = body.get('password')
+            dob = body.get('dob')
+            if username is None:
+                return {'message': f'User ID is missing'}, 400
+            if password is None:
+                return {'message': f'password is missing'}, 400
+            if dob is not None:
+                try:
+                    dob = datetime.strptime(dob, '%Y-%m-%d').date()
+                except:
+                    return {'message': f'Date of birth format error {dob}, must be mm-dd-yyyy'}, 400
+            user = test.query.filter_by(_username=username).first()
+            if dob != user.dob:
+                return {'message': f'birthday is not matched'}, 400
+            user.password = password
+            db.session.commit()
+            return jsonify(user.read())
+    class _delete_user(Resource):
+        def post(self):
+            body = request.get_json()
+            username = body.get('username')
+            password = body.get('password')
+            if username is None:
+                return {'message': f'User ID is missing'}, 400
+            if password is None:
+                return {'message': f'password is missing'}, 400
+            user = test.query.filter_by(_username=username).first()
+            if user is None or not user.is_password(password):
+                return {'message': f"Invalid user id or password"}, 400  
+            user.delete()
+            db.session.commit()
+            return jsonify(user.read())
         
         
         
@@ -447,4 +483,5 @@ class UserAPI:
     api.add_resource(_update_friday, '/update_friday')
     api.add_resource(_update_saturday, '/update_saturday')
     api.add_resource(_update_sunday, '/update_sunday')
-
+    api.add_resource(_update_password, '/update_password')
+    api.add_resource(_delete_user, '/delete_user')
