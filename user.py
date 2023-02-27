@@ -423,11 +423,7 @@ class UserAPI:
                 return {'message': f'User ID is missing'}, 400
             if password is None:
                 return {'message': f'password is missing'}, 400
-            if dob is not None:
-                try:
-                    dob = datetime.strptime(dob, '%Y-%m-%d').date()
-                except:
-                    return {'message': f'Date of birth format error {dob}, must be mm-dd-yyyy'}, 400
+            
             user = test.query.filter_by(_username=username).first()
             if dob != user.dob:
                 return {'message': f'birthday is not matched'}, 400
