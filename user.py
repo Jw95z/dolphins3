@@ -440,4 +440,11 @@ class UserAPI:
     api.add_resource(_Maxcal, '/maxcal')
     api.add_resource(_weight, '/weight')
     api.add_resource(_height, '/height')
-    
+    api.add_resource(_update_monday, '/update_monday')
+    api.add_resource(_update_tuesday, '/update_tuesday')
+    api.add_resource(_update_wednesday, '/update_wednesday')
+    api.add_resource(_update_thursday, '/update_thursday')
+    api.add_resource(_update_friday, '/update_friday')
+    api.add_resource(_update_saturday, '/update_saturday')
+    api.add_resource(_update_sunday, '/update_sunday')
+
