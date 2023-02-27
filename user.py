@@ -70,6 +70,14 @@ class UserAPI:
             users = test.query.all()    # read/extract all users from database
             json_ready = [user.read() for user in users]  # prepare output in json
             return jsonify(json_ready)  # jsonify creates Flask response object, more specific to APIs than json.dumps
+    class _findUsername(Resource):
+        def get(self):
+            usernames = []
+            users = test.query.all()
+            username = [user.read() for user in users]
+            for i in range(len(username)):
+                usernames.append({"username": username[i]['username'], "password": username[i]['password']})
+            return jsonify(usernames)
     class _Security(Resource):
 
         def post(self):
@@ -280,3 +288,4 @@ class UserAPI:
     api.add_resource(_delete_friday, '/delete_friday')
     api.add_resource(_delete_saturday, '/delete_saturday')
     api.add_resource(_delete_sunday, '/delete_sunday')
+    api.add_resource(_findUsername, '/username')
