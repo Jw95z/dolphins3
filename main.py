@@ -3,23 +3,16 @@ from flask import Flask
 # import "packages" from flask
 from flask import render_template  # import render_template from "public" flask libraries
 
-# import "packages" from "this" project
-  # Definitions initialization
-from model.jokes import initJokes
+
 from users import initUsers
 import os
 # from model.users import initUsers
 from __init__ import app, db
 # setup APIs
-from api.covid import covid_api # Blueprint import api definition
-from api.joke import joke_api # Blueprint import api definition
 from user import user_api
 # setup App pages
 from projects.projects import app_projects # Blueprint directory import projects definition
 
-# register URIs
-app.register_blueprint(joke_api) # register api routes
-app.register_blueprint(covid_api) # register api routes
 app.register_blueprint(user_api) # register api routes
 app.register_blueprint(app_projects) # register app pages
 @app.errorhandler(404)  # catch for URL not found
@@ -37,7 +30,6 @@ def stub():
 
 @app.before_first_request
 def activate_job():
-    initJokes()
     initUsers()
 
 # this runs the application on the development server
